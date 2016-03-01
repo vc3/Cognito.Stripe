@@ -1,0 +1,13 @@
+C:\Projects\xAppify\Release\Production\Public\Cognito.Stripe\Cognito.Stripe\bin\Debug\Cognito.Stripe.dll
+C:\Projects\xAppify\Release\Production\Public\Cognito.Stripe\Cognito.Stripe\bin\Debug\Cognito.Stripe.pdb
+C:\Projects\xAppify\Release\Production\Public\Cognito.Stripe\Cognito.Stripe\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\xAppify\Release\Production\Public\Cognito.Stripe\Cognito.Stripe\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\xAppify\Release\Production\Public\Cognito.Stripe\Cognito.Stripe\obj\Debug\Cognito.Stripe.csprojResolveAssemblyReference.cache
+C:\Projects\xAppify\Release\Production\Public\Cognito.Stripe\Cognito.Stripe\obj\Debug\Cognito.Stripe.dll
+C:\Projects\xAppify\Release\Production\Public\Cognito.Stripe\Cognito.Stripe\obj\Debug\Cognito.Stripe.pdb
+C:\Projects\Cognito.Stripe\Cognito.Stripe\bin\Debug\Cognito.Stripe.dll
+C:\Projects\Cognito.Stripe\Cognito.Stripe\bin\Debug\Cognito.Stripe.pdb
+C:\Projects\Cognito.Stripe\Cognito.Stripe\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Cognito.Stripe\Cognito.Stripe\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Cognito.Stripe\Cognito.Stripe\obj\Debug\Cognito.Stripe.dll
+C:\Projects\Cognito.Stripe\Cognito.Stripe\obj\Debug\Cognito.Stripe.pdb
