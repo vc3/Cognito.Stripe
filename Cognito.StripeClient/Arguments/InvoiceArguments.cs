@@ -44,16 +44,17 @@ namespace Cognito.StripeClient.Arguments
 		{
 			set
 			{
-				if (value && !ExpandedProperties.Contains("charge"))
-					ExpandedProperties.Add("charge");
-				else if (!value && ExpandedProperties.Contains("charge"))
-					ExpandedProperties.Remove("charge");
+				ToggleExpandedProperty(value, "charge");
 			}
 		}
 
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
+		[JsonIgnore]
+		public bool ExpandCustomer
 		{
-			return ParseBaseArguments(client, collection, prefix);
+			set
+			{
+				ToggleExpandedProperty(value, "customer");
+			}
 		}
 	}
 
@@ -133,10 +134,16 @@ namespace Cognito.StripeClient.Arguments
 		{
 			set 
 			{
-				if (value && !ExpandedProperties.Contains("data.charge"))
-					ExpandedProperties.Add("data.charge");
-				else if (!value && ExpandedProperties.Contains("data.charge"))
-					ExpandedProperties.Remove("data.charge");
+				ToggleExpandedProperty(value, "data.charge");
+			}
+		}
+
+		[JsonIgnore]
+		public bool ExpandCustomer
+		{
+			set
+			{
+				ToggleExpandedProperty(value, "data.customer");
 			}
 		}
 

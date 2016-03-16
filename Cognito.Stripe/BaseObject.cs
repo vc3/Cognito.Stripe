@@ -1,4 +1,5 @@
-﻿using Cognito.Stripe.Converters;
+﻿using Cognito.Stripe.Classes;
+using Cognito.Stripe.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,17 @@ namespace Cognito.Stripe
 		public Dictionary<string, string> Metadata { get; set; }
 		public Error Error { get; set; }
 		public bool Deleted { get; set; }
-		public string Customer { get; set; }
+		public Customer Customer { get; set; }
+
+		public bool HasError { get { return Error != null; } }
+
+		public string ErrorMessage { get { return Error != null ? Error.Message : String.Empty; } }
+
+		/// <summary>
+		/// Gets or sets a flag indicating the object was fully loaded from the request.
+		/// </summary>
+		[JsonIgnore]
+		public bool Loaded { get; set; }
 	
 		/// <summary>
 		/// Gets or sets the DateTime representation of the date created
@@ -57,7 +68,10 @@ namespace Cognito.Stripe
 	{
 		public string Object { get { return "list"; } }
 		public string Url { get; set; }
-		public bool Has_More { get; set; }
+		[JsonProperty("has_more")]
+		public bool HasMore { get; set; }
+		[JsonProperty("total_count")]
+		public int TotalCount { get; set; }
 		public ICollection<T> Data { get; set; }
 	}
 }

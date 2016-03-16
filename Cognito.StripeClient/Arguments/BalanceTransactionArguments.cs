@@ -17,6 +17,9 @@ namespace Cognito.StripeClient.Arguments
 	public class BalanceTransactionGetArguments : GetArguments
 	{
 		public override string GetEndpoint() { return String.Format("balance/history/{0}", Id); }
+
+		[JsonIgnore]
+		public bool ExpandSource { set { ToggleExpandedProperty(value, "source"); } }
 	}
 
 	public class BalanceTransactionSearchArguments : SearchArguments

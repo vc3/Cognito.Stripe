@@ -11,8 +11,10 @@ namespace Cognito.Stripe.Classes
 	{
 		[JsonProperty("name")]
 		public string RecipientName { get; set; }
+
 		[JsonProperty("phone")]
 		public string PhoneNumber { get; set; }
+		
 		public Address Address { get; set; }
 	}
 }

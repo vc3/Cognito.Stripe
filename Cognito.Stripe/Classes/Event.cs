@@ -14,7 +14,11 @@ namespace Cognito.Stripe.Classes
 	public class Event : BaseObject
 	{
 		public override string Object { get { return "event"; } }
+
+		public string API_Version { get; set; }
+
 		public int? Pending_Webhooks { get; set; }
+		
 		public string Type { get; set; }
 		public string Request { get; set; }
 		public string User_Id { get; set; }

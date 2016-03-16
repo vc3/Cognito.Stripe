@@ -10,15 +10,21 @@ namespace Cognito.Stripe.Classes
 	{
 		public override string Object { get { return "recipient"; } }
 
-		public RecipientType Type { get; set; }
 		[JsonProperty("active_account")]
-		public Account ActiveAccount { get; set; }
+		public BankAccount ActiveAccount { get; set; }
+
+		public StripeList<Card> Cards { get; set; }
+
+		[JsonProperty("default_card")]
+		public Card DefaultCard { get; set; }
+
 		public string Description { get; set; }
 		public string Email { get; set; }
 		public string Name { get; set; }
-		public StripeList<Card> Cards { get; set; }
-		[JsonProperty("default_card")]
-		public string DefaultCardId { get; set; }
+		public RecipientType Type { get; set; }
+
+		[JsonProperty("migrated_to")]
+		public Account MigratedAccount { get; set; }
 	}
 
 	public enum RecipientType

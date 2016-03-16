@@ -86,36 +86,6 @@ namespace Cognito.StripeClient.Arguments
 		}
 	}
 
-	public class ChargeGetArguments : GetArguments
-	{
-		[JsonIgnore]
-		public override string ObjectName { get { return "charges"; } }
-
-		[JsonIgnore]
-		public bool ExpandInvoice
-		{
-			set
-			{
-				if (value && !ExpandedProperties.Contains("data.invoice"))
-					ExpandedProperties.Add("data.invoice");
-				else if (!value && ExpandedProperties.Contains("data.invoice"))
-					ExpandedProperties.Remove("data.charge");
-			}
-		}
-
-		[JsonIgnore]
-		public bool ExpandInvoiceCharge
-		{
-			set
-			{
-				if (value && !ExpandedProperties.Contains("data.invoice.charge"))
-					ExpandedProperties.Add("data.invoice.charge");
-				else if (!value && ExpandedProperties.Contains("data.invoice.charge"))
-					ExpandedProperties.Remove("data.charge.charge");
-			}
-		}
-	}
-
 	public class ChargeUpdateArguments : UpdateArguments
 	{
 		public string Description { get; set; }
@@ -132,6 +102,36 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "charges"; } }
 	}
 
+	public class ChargeGetArguments : GetArguments
+	{
+		[JsonIgnore]
+		public override string ObjectName { get { return "charges"; } }
+
+		[JsonIgnore]
+		public bool ExpandInvoice { set { ToggleExpandedProperty(value, "invoice"); } }
+
+		[JsonIgnore]
+		public bool ExpandInvoiceCharge { set { ToggleExpandedProperty(value, "invoice.charge"); } }
+
+		[JsonIgnore]
+		public bool ExpandCustomer { set { ToggleExpandedProperty(value, "customer"); } }
+
+		[JsonIgnore]
+		public bool ExpandApplicationFee { set { ToggleExpandedProperty(value, "application_fee"); } }
+
+		[JsonIgnore]
+		public bool ExpandBalanceTransaction { set { ToggleExpandedProperty(value, "balance_transaction"); } }
+
+		[JsonIgnore]
+		public bool ExpandDestination { set { ToggleExpandedProperty(value, "destination"); } }
+
+		[JsonIgnore]
+		public bool ExpandOrder { set { ToggleExpandedProperty(value, "order"); } }
+
+		[JsonIgnore]
+		public bool ExpandTransfer { set { ToggleExpandedProperty(value, "transfer"); } }
+	}
+
 	public class ChargeSearchArguments : SearchArguments
 	{
 		[JsonProperty("customer")]
@@ -141,27 +141,27 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "charges"; } }
 
 		[JsonIgnore]
-		public bool ExpandInvoice
-		{
-			set
-			{
-				if (value && !ExpandedProperties.Contains("data.invoice"))
-					ExpandedProperties.Add("data.invoice");
-				else if (!value && ExpandedProperties.Contains("data.invoice"))
-					ExpandedProperties.Remove("data.charge");
-			}
-		}
+		public bool ExpandInvoice { set { ToggleExpandedProperty(value, "data.invoice"); } }
 
 		[JsonIgnore]
-		public bool ExpandInvoiceCharge
-		{
-			set
-			{
-				if (value && !ExpandedProperties.Contains("data.invoice.charge"))
-					ExpandedProperties.Add("data.invoice.charge");
-				else if (!value && ExpandedProperties.Contains("data.invoice.charge"))
-					ExpandedProperties.Remove("data.charge.charge");
-			}
-		}
+		public bool ExpandInvoiceCharge { set { ToggleExpandedProperty(value, "data.invoice.charge"); } }
+
+		[JsonIgnore]
+		public bool ExpandCustomer { set { ToggleExpandedProperty(value, "data.customer"); } }
+
+		[JsonIgnore]
+		public bool ExpandApplicationFee { set { ToggleExpandedProperty(value, "data.application_fee"); } }
+
+		[JsonIgnore]
+		public bool ExpandBalanceTransaction { set { ToggleExpandedProperty(value, "data.balance_transaction"); } }
+
+		[JsonIgnore]
+		public bool ExpandDestination { set { ToggleExpandedProperty(value, "data.destination"); } }
+
+		[JsonIgnore]
+		public bool ExpandOrder { set { ToggleExpandedProperty(value, "data.order"); } }
+
+		[JsonIgnore]
+		public bool ExpandTransfer { set { ToggleExpandedProperty(value, "data.transfer"); } }
 	}
 }

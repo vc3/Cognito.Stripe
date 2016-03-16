@@ -31,6 +31,15 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public string FeeId { get; set; }
 
+		[JsonIgnore]
+		public bool ExpandBalanceTransaction
+		{
+			set
+			{
+				ToggleExpandedProperty(value, "balance_transaction");
+			}
+		}
+
 		public override string GetEndpoint()
 		{
 			return String.Format("application_fees/{0}/refunds/{1}", FeeId, Id);
@@ -52,6 +61,15 @@ namespace Cognito.StripeClient.Arguments
 	{ 
 		[JsonIgnore]
 		public string FeeId { get; set; }
+
+		[JsonIgnore]
+		public bool ExpandBalanceTransaction
+		{
+			set
+			{
+				ToggleExpandedProperty(value, "data.balance_transaction");
+			}
+		}
 
 		public override string GetEndpoint()
 		{

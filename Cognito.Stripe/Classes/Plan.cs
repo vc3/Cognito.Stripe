@@ -17,13 +17,17 @@ namespace Cognito.Stripe.Classes
 		public decimal? Amount { get; set; }
 
 		public PlanInterval Interval { get; set; }
+
 		[JsonProperty("interval_count")]
 		public int? IntervalCount { get; set; }
+		
 		public string Name { get; set; }
-		[JsonProperty("trial_period_days")]
-		public int? TrialPeriodDays { get; set; }
+		
 		[JsonProperty("statement_descriptor")]
 		public string StatementDescriptor { get; set; }
+		
+		[JsonProperty("trial_period_days")]
+		public int? TrialPeriodDays { get; set; }
 	}
 
 	public enum PlanInterval

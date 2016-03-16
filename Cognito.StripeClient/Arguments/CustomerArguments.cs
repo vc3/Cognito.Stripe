@@ -48,6 +48,8 @@ namespace Cognito.StripeClient.Arguments
 				args.Source = args.CardToken;
 			else if (!String.IsNullOrWhiteSpace(args.BitcoinToken))
 				args.Source = args.BitcoinToken;
+			else if (!String.IsNullOrWhiteSpace(args.BankAccountToken))
+				args.Source = args.BankAccountToken;
 		}
 	}
 

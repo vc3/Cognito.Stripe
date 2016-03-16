@@ -17,15 +17,17 @@ namespace Cognito.Stripe.Classes
 		public decimal? Amount { get; set; }
 
 		public DateTime? Date { get; set; }
+
+		public string Description { get; set; }
+		public bool Discountable { get; set; }
+		public Invoice Invoice { get; set; }
+		public Period Period { get; set; }
+		public Plan Plan { get; set; }
 		
 		[JsonProperty("proration")]
 		public bool IsProrated { get; set; }
-		public string Description { get; set; }
-		[JsonProperty("invoice")]
-		public string InvoiceId { get; set; }
-		public Plan Plan { get; set; }
+
 		public int? Quantity { get; set; }
-		[JsonProperty("subscription")]
-		public string SubscriptionId { get; set; }
+		public Subscription Subscription { get; set; }
 	}
 }

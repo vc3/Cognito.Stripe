@@ -17,18 +17,44 @@ namespace Cognito.Stripe.Classes
 		[JsonIgnore]
 		public override string Object { get { return base.Object; } }
 
+		public Currency Currency { get; set; }
+
+		public string Fingerprint { get; set; }
+		
+		[JsonProperty("last4")]
+		public string LastFourDigits { get; set; }
+
+		public Country Country { get; set; }
+
 		[JsonProperty("object")]
 		public string ObjectType { get; set; }
 
+		public string Name { get; set; }
+
+		public Account Account { get; set; }
+
 		#region Card Properties
+
 		public string Brand { get; set; }
+
+		[JsonProperty("cvc_check")]
+		public string CVCCheck { get; set; }
+
+		[JsonProperty("dynamic_last4")]
+		public string LastFourDeviceNumber { get; set; }
+
 		[JsonProperty("exp_month")]
 		public int? ExpirationMonth { get; set; }
 		[JsonProperty("exp_year")]
 		public int? ExpirationYear { get; set; }
-		public string Fingerprint { get; set; }
-		[JsonProperty("last4")]
-		public string LastFourDigits { get; set; }
+		
+		[JsonProperty("funding")]
+		public FundingType FundingType { get; set; }
+
+		public Recipient Recipient { get; set; }
+
+		[JsonProperty("tokenization_method")]
+		public string TokenizationMethod { get; set; }
 
 		[JsonProperty("address_line1")]
 		public string AddressLine1 { get; set; }
@@ -46,17 +72,6 @@ namespace Cognito.Stripe.Classes
 		public string AddressZipCodeCheck { get; set; }
 		[JsonProperty("address_country")]
 		public string AddressCountry { get; set; }
-
-		[JsonProperty("country")]
-		public string CountryCode { get; set; }
-		[JsonProperty("cvc_check")]
-		public string CVCCheck { get; set; }
-
-		[JsonProperty("dynamic_last4")]
-		public string LastFourDeviceNumber { get; set; }
-		public string Name { get; set; }
-		[JsonProperty("recipient")]
-		public string RecipientId { get; set; }
 		#endregion
 
 		#region BitcoinReceiver Properties
@@ -71,7 +86,6 @@ namespace Cognito.Stripe.Classes
 		public decimal? BitcoinAmount { get; set; }
 		[JsonProperty("bitcoin_uri")]
 		public string BitcoinUri { get; set; }
-		public Currency Currency { get; set; }
 		public bool Filled { get; set; }
 		[JsonProperty("inbound_address")]
 		public string InboundAddress { get; set; }
@@ -86,6 +100,21 @@ namespace Cognito.Stripe.Classes
 		public string PaymentId { get; set; }
 		[JsonProperty("refund_address")]
 		public string RefundAddress { get; set; }
+		#endregion
+
+		#region BankAccount Properties
+
+		[JsonProperty("bank_name")]
+		public string BankName { get; set; }
+		
+		[JsonProperty("default_for_currency")]
+		public bool CurrencyDefault { get; set; }
+		
+		public string Status { get; set; }
+		
+		[JsonProperty("routing_number")]
+		public string RoutingNumber { get; set; }
+
 		#endregion
 
 		public static implicit operator Card(Source src)
@@ -111,12 +140,12 @@ namespace Cognito.Stripe.Classes
 				AddressZipCode = src.AddressZipCode,
 				AddressZipCodeCheck = src.AddressZipCodeCheck,
 				AddressCountry = src.AddressCountry,
-				CountryCode = src.CountryCode,
+				Country = src.Country,
 				Customer = src.Customer,
 				CVCCheck = src.CVCCheck,
 				LastFourDeviceNumber = src.LastFourDeviceNumber,
 				Name = src.Name,
-				RecipientId = src.RecipientId
+				Recipient = src.Recipient
 			};
 		}
 
@@ -145,5 +174,37 @@ namespace Cognito.Stripe.Classes
 				RefundAddress = src.RefundAddress
 			};
 		}
+
+		public static implicit operator BankAccount(Source src)
+		{
+			return src == null || !String.Equals(src.ObjectType, "bank_account", StringComparison.OrdinalIgnoreCase) ? null :
+			new BankAccount
+			{
+				Id = src.Id,
+				Country = src.Country,
+				Fingerprint = src.Fingerprint,
+				LastFourDigits = src.LastFourDigits,
+				Name = src.Name,
+				LiveMode = src.LiveMode,
+				Metadata = src.Metadata,
+				Error = src.Error,
+				Deleted = src.Deleted,
+				DateCreated = src.DateCreated,
+				Currency = src.Currency,
+				Account = src.Account,
+				BankName = src.BankName,
+				CurrencyDefault = src.CurrencyDefault,
+				RoutingNumber = src.RoutingNumber,
+				Status = src.Status
+			};
+		}
+	}
+
+	public enum SourceType
+	{ 
+		Card,
+		Bank_Account,
+		Bitcoin_Receiver,
+		Alipay_Account
 	}
 }

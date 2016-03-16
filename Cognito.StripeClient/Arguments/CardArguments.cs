@@ -48,9 +48,6 @@ namespace Cognito.StripeClient.Arguments
 			return String.Format("customers/{0}/sources", CustomerId);
 		}
 
-		[JsonIgnore]
-		public BitcoinCreateArguments BitcoinArguments { get; set; }
-
 		public string Source { get; set; }
 	}
 
@@ -112,7 +109,7 @@ namespace Cognito.StripeClient.Arguments
 
 		public override string GetEndpoint()
 		{
-			return String.Format("customers/{0}/sources", CustomerId);
+			return String.Format("customers/{0}/sources?object=card", CustomerId);
 		}
 	}
 }

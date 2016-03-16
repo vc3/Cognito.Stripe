@@ -53,12 +53,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AccountVerification.cs" />
     <Compile Include="Classes\Address.cs" />
     <Compile Include="Classes\Balance.cs" />
     <Compile Include="Classes\BalanceTransaction.cs" />
     <Compile Include="Classes\BitcoinReceiver.cs" />
+    <Compile Include="Classes\BitcoinTransaction.cs" />
+    <Compile Include="Classes\ChargeDeclination.cs" />
+    <Compile Include="Classes\DeliveryEstimate.cs" />
+    <Compile Include="Classes\EntityOwner.cs" />
     <Compile Include="Classes\Event.cs" />
+    <Compile Include="Classes\ExternalAccount.cs" />
+    <Compile Include="Classes\FileUpload.cs" />
+    <Compile Include="Classes\Inventory.cs" />
+    <Compile Include="Classes\LegalEntity.cs" />
+    <Compile Include="Classes\Order.cs" />
+    <Compile Include="Classes\OrderItem.cs" />
+    <Compile Include="Classes\PackageDimensions.cs" />
+    <Compile Include="Classes\Product.cs" />
+    <Compile Include="Classes\Reversal.cs" />
+    <Compile Include="Classes\ShippingMethod.cs" />
+    <Compile Include="Classes\SKU.cs" />
     <Compile Include="Classes\Source.cs" />
+    <Compile Include="Classes\TermsOfServiceAcceptance.cs" />
+    <Compile Include="Classes\TransferSchedule.cs" />
+    <Compile Include="Classes\Verification.cs" />
+    <Compile Include="Converters\DateOfBirthConverter.cs" />
     <Compile Include="Converters\LookupConverter.cs" />
     <Compile Include="Converters\DateTimeConverter.cs" />
     <Compile Include="Converters\EntityConverter.cs" />

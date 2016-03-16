@@ -26,9 +26,14 @@ namespace Cognito.Stripe.Converters
 			// create an instance of the specified type
 			var instance = FormatterServices.GetUninitializedObject(objectType);
 
+			// if the token is the start of an object, fully populate the properties on the instance
+			// else the object is not fully expanded and only the id of the object is returned.
 			if (reader.TokenType == JsonToken.StartObject)
+			{
 				serializer.Populate(reader, instance);
-			else if(reader.TokenType == JsonToken.String)
+				((BaseObject)instance).Loaded = true;
+			}
+			else if (reader.TokenType == JsonToken.String)
 				((BaseObject)instance).Id = reader.Value.ToString();
 
 			if (instance != null)

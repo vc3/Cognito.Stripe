@@ -12,10 +12,12 @@ namespace Cognito.Stripe.Classes
 	{
 		public override string Object { get { return "refund"; } }
 
+		public Currency Currency { get; set;}
+
 		[Cents]
 		public decimal? Amount { get; set; }
 
-		public Currency Currency { get; set;}
+		public Charge Charge { get; set; }
 
 		[JsonProperty("balance_transaction")]
 		public string BalanceTransactionId { get; set; }

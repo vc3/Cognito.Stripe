@@ -33,6 +33,15 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public string ChargeId { get; set; }
 
+		[JsonIgnore]
+		public bool ExpandCharge
+		{
+			set
+			{
+				ToggleExpandedProperty(value, "charge");
+			}
+		}
+
 		public override string GetEndpoint() { return String.Format("charges/{0}/refunds/{1}", ChargeId, Id); }
 	}
 
@@ -47,6 +56,15 @@ namespace Cognito.StripeClient.Arguments
 	{
 		[JsonIgnore]
 		public string ChargeId { get; set; }
+
+		[JsonIgnore]
+		public bool ExpandCharge
+		{
+			set
+			{
+				ToggleExpandedProperty(value, "data.charge");
+			}
+		}
 
 		public override string GetEndpoint() { return String.Format("charges/{0}/refunds", ChargeId); }
 	}

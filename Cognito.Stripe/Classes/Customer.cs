@@ -11,19 +11,22 @@ namespace Cognito.Stripe.Classes
 	{
 		public override string Object { get { return "customer"; } }
 
-		public StripeList<Source> Sources { get; set; }
+		public Currency Currency { get; set; }
 
 		[Cents]
 		[JsonProperty("account_balance")]
 		public decimal? AccountBalance { get; set; }
-		
-		public Currency Currency { get; set;}
+
 		[JsonProperty("default_source")]
-		public string DefaultSourceId { get; set; }
+		public Source DefaultSource { get; set; }
+
 		public bool Deliquent { get; set; }
 		public string Description { get; set; }
 		public Discount Discount { get; set; }
 		public string Email { get; set; }
+		public ShippingInfo Shipping { get; set; }
+		public StripeList<Source> Sources { get; set; }
+		
 		public StripeList<Subscription> Subscriptions { get; set; }
 
 		[JsonIgnore]
@@ -31,7 +34,7 @@ namespace Cognito.Stripe.Classes
 		{
 			get
 			{
-				return Sources != null ? Sources.Data.FirstOrDefault(c => c.Id == DefaultSourceId) : null;
+				return Sources != null ? Sources.Data.FirstOrDefault(c => c.Id == DefaultSource.Id) : null;
 			}		
 		}
 
@@ -40,7 +43,7 @@ namespace Cognito.Stripe.Classes
 		{
 			get
 			{
-				return Sources != null ? Sources.Data.FirstOrDefault(c => c.Id == DefaultSourceId) : null;
+				return Sources != null ? Sources.Data.FirstOrDefault(c => c.Id == DefaultSource.Id) : null;
 			}
 		}
 	}

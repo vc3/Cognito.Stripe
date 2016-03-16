@@ -21,7 +21,7 @@ namespace Cognito.Stripe.Converters
 			if (reader.TokenType == JsonToken.String)
 			{
 				var value = reader.Value.ToString();
-				result = !String.IsNullOrWhiteSpace(value) ? Enum.Parse(objectType, value) : 0;
+				result = !String.IsNullOrWhiteSpace(value) ? Enum.Parse(objectType, value, true) : 0;
 			}
 
 			return result;

@@ -24,31 +24,33 @@ namespace Cognito.Stripe.Classes
 		public decimal? FeeAmount { get; set; }
 
 		[JsonProperty("fee_details")]
-		public List<FeeDetail> FeeDetails { get; set; }
+		public ICollection<FeeDetail> FeeDetails { get; set; }
 
 		[Cents]
 		[JsonProperty("net")]
 		public decimal? NetAmount { get; set; }
 
 		public BalanceTransactionStatus Status { get; set; }
-
 		public BalanceTransactionType Type { get; set; }
-
 		public string Description { get; set; }
+		public Source Source { get; set; }
 
-		[JsonProperty("source")]
-		public string SourceId { get; set; }
+		[JsonProperty("sourced_transfers")]
+		public StripeList<Transfer> SourcedTransfers { get; set; }
 	}
 
 	public enum BalanceTransactionType
 	{ 
-		Charge,
-		Refund,
 		Adjustment,
 		Application_Fee,
 		Application_Fee_Refund,
+		Charge,
+		Payment,
+		Refund,
 		Transfer,
-		Transfer_Failure
+		Transfer_Cancel,
+		Transfer_Failure,
+		Transfer_Refund
 	}
 
 	public enum BalanceTransactionStatus

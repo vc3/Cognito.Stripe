@@ -9,6 +9,7 @@ using System.Reflection;
 using Cognito.Stripe.Converters;
 using System.Web;
 using Cognito.Stripe.Helpers;
+using System.Collections;
 
 namespace Cognito.StripeClient.Arguments
 {
@@ -20,6 +21,7 @@ namespace Cognito.StripeClient.Arguments
 
 		public virtual string GetEndpoint() { return ""; }
 
+		[JsonIgnore]
 		public virtual string ObjectName { get { return ""; } }
 
 		[JsonIgnore]
@@ -42,7 +44,9 @@ namespace Cognito.StripeClient.Arguments
 				var argName = jsonProperty == null ? property.Name : jsonProperty.PropertyName;
 				var argValue = property.GetValue(this);
 
-				if (argValue != null && !String.IsNullOrWhiteSpace(argValue.ToString()))
+				var valueSet = argValue != null && (!String.IsNullOrWhiteSpace(argValue.ToString()) || this is UpdateArguments);
+
+				if (valueSet)
 				{
 					if (property.PropertyType == typeof(Dictionary<string, string>))
 					{
@@ -66,24 +70,38 @@ namespace Cognito.StripeClient.Arguments
 						}
 						else
 						{
-							if (argValue is decimal? && ((decimal?)argValue).HasValue)
+							var convertToCents = property.GetCustomAttribute<CentsAttribute>();
+
+							// parse ICollection properties
+							if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>))
 							{
-								var convertToCents = property.GetCustomAttribute<CentsAttribute>();
-								if (convertToCents != null)
+								var valuesArray = new List<string>();
+								var propValues = argValue as ICollection;
+
+								foreach (var propVal in propValues)
 								{
-									if (currencyProp != null)
-									{
-										Currency currency = currencyProp.GetValue(this) as Currency ?? Currency.USD;
-										argValue = BaseObject.GetAmountNoDecimal((decimal?)argValue, currency);
-									}
+									var paramVal = convertToCents != null ? ConvertToCents(propVal, currencyProp) : propVal;
+									if (paramVal != null)
+										valuesArray.Add(paramVal.ToString());
 								}
+
+								key = String.Format("{0}[]", key.ToLower());
+								argCollection.Add(key, String.Join(String.Format("&{0}=", key), valuesArray));
 							}
-							else if (argValue is DateTime? && ((DateTime?)argValue).HasValue)
-								argValue = DateTimeConverter.ConvertToSeconds(argValue as DateTime?);
+							else
+							{
+								if (argValue is decimal? && ((decimal?)argValue).HasValue)
+								{
+									if (convertToCents != null)
+										argValue = ConvertToCents(argValue, currencyProp);
+								}
+								else if (argValue is DateTime? && ((DateTime?)argValue).HasValue)
+									argValue = DateTimeConverter.ConvertToSeconds(argValue as DateTime?);
 
-							var paramValue = typeof(Lookup).IsAssignableFrom(property.PropertyType) ? ((Lookup)argValue).Code : argValue.ToString();
+								var paramValue = typeof(Lookup).IsAssignableFrom(property.PropertyType) ? ((Lookup)argValue).Code : argValue.ToString();
 
-							argCollection.Add(key.ToLower(), HttpUtility.UrlEncode(paramValue));
+								argCollection.Add(key.ToLower(), HttpUtility.UrlEncode(paramValue));
+							}
 						}
 					}
 				}
@@ -98,6 +116,35 @@ namespace Cognito.StripeClient.Arguments
 		public virtual NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
 		{
 			return ParseBaseArguments(client, collection, prefix);
+		}
+
+		protected int? ConvertToCents(object argValue, PropertyInfo currencyProp)
+		{
+			if (currencyProp == null)
+				return null;
+		
+			Currency currency = currencyProp.GetValue(this) as Currency ?? Currency.USD;
+			return BaseObject.GetAmountNoDecimal((decimal?)argValue, currency);
+		}
+
+		protected void ToggleExpandedProperty(bool expand, string propertyPath)
+		{
+			if (expand)
+				ExpandProperty(propertyPath);
+			else
+				CollapseProperty(propertyPath);
+		}
+
+		void ExpandProperty(string propertyPath)
+		{
+			if (!ExpandedProperties.Contains(propertyPath))
+				ExpandedProperties.Add(propertyPath);
+		}
+
+		void CollapseProperty(string propertyPath)
+		{
+			if (ExpandedProperties.Contains(propertyPath))
+				ExpandedProperties.Remove(propertyPath);
 		}
 	}
 
@@ -127,6 +174,7 @@ namespace Cognito.StripeClient.Arguments
 
 		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
 		{
+			Limit = Limit.GetValueOrDefault(100);
 			return base.ParseArguments(client, collection, prefix);
 		}
 	}
@@ -156,7 +204,7 @@ namespace Cognito.StripeClient.Arguments
 
 		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
 		{
-			return new NameValueCollection();
+			return base.ParseArguments(client, collection, prefix);
 		}
 	}
 
