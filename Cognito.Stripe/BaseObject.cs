@@ -16,10 +16,10 @@ namespace Cognito.Stripe
 		public string Id { get; set; }
 		public virtual string Object { get { return ""; } }
 		public bool LiveMode { get; set; }
-		public Dictionary<string, string> Metadata { get; set; }
 		public Error Error { get; set; }
 		public bool Deleted { get; set; }
 		public Customer Customer { get; set; }
+		public Dictionary<string, string> Metadata { get; set; }
 
 		public bool HasError { get { return Error != null; } }
 
@@ -39,6 +39,7 @@ namespace Cognito.Stripe
 		[JsonConverter(typeof(DateTimeConverter))]
 		public DateTime? DateCreated { get; set; }
 
+		#region Methods
 		public static decimal GetDecimalFactor(Currency currency)
 		{
 			if (currency == null)
@@ -56,11 +57,7 @@ namespace Cognito.Stripe
 		{
 			return Decimal.ToInt32(amount.GetValueOrDefault(0M) * Convert.ToDecimal(Math.Pow(10, currency.NumberOfDecimals)));
 		}
-
-		internal static void ConvertAmounts(BaseObject baseObject)
-		{
-			throw new NotImplementedException();
-		}
+		#endregion
 	}
 
 	public class StripeList<T>

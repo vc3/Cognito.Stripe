@@ -11,14 +11,10 @@
     <AssemblyName>Cognito.Stripe</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\Release\Mainline\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -40,9 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Dependencies\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,11 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AccountVerification.cs" />
+    <Compile Include="Classes\AliPayAccount.cs" />
+    <Compile Include="Classes\BitcoinTransaction.cs" />
+    <Compile Include="Classes\FeeDetail.cs" />
+    <Compile Include="Classes\FundDetail.cs" />
+    <Compile Include="Classes\PaymentSource.cs" />
+    <Compile Include="Classes\Reversal.cs" />
+    <Compile Include="Classes\Verification.cs" />
     <Compile Include="Classes\Address.cs" />
     <Compile Include="Classes\Balance.cs" />
     <Compile Include="Classes\BalanceTransaction.cs" />
     <Compile Include="Classes\BitcoinReceiver.cs" />
-    <Compile Include="Classes\BitcoinTransaction.cs" />
     <Compile Include="Classes\ChargeDeclination.cs" />
     <Compile Include="Classes\DeliveryEstimate.cs" />
     <Compile Include="Classes\EntityOwner.cs" />
@@ -71,25 +72,21 @@
     <Compile Include="Classes\OrderItem.cs" />
     <Compile Include="Classes\PackageDimensions.cs" />
     <Compile Include="Classes\Product.cs" />
-    <Compile Include="Classes\Reversal.cs" />
     <Compile Include="Classes\ShippingMethod.cs" />
     <Compile Include="Classes\SKU.cs" />
-    <Compile Include="Classes\Source.cs" />
     <Compile Include="Classes\TermsOfServiceAcceptance.cs" />
     <Compile Include="Classes\TransferSchedule.cs" />
-    <Compile Include="Classes\Verification.cs" />
+    <Compile Include="Converters\StripeClassConverter.cs" />
     <Compile Include="Converters\DateOfBirthConverter.cs" />
     <Compile Include="Converters\LookupConverter.cs" />
     <Compile Include="Converters\DateTimeConverter.cs" />
-    <Compile Include="Converters\EntityConverter.cs" />
+    <Compile Include="Converters\BaseObjectConverter.cs" />
     <Compile Include="Converters\EventDataConverter.cs" />
     <Compile Include="Converters\EnumConverter.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="DisputeEvidence.cs" />
     <Compile Include="Classes\EvidenceDetails.cs" />
-    <Compile Include="FeeDetail.cs" />
-    <Compile Include="FundDetail.cs" />
     <Compile Include="Classes\LineItem.cs" />
     <Compile Include="Classes\ShippingInfo.cs" />
     <Compile Include="Helpers\CentsAttribute.cs" />
@@ -118,9 +115,7 @@
     <Compile Include="Classes\Subscription.cs" />
     <Compile Include="Classes\Token.cs" />
     <Compile Include="Classes\Transfer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="Transaction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

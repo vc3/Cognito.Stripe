@@ -11,14 +11,10 @@
     <AssemblyName>Cognito.StripeClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\Release\Mainline\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -41,8 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\Dependencies\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,13 +54,12 @@
   <ItemGroup>
     <Compile Include="Arguments\AccountArguments.cs" />
     <Compile Include="Arguments\BalanceTransactionArguments.cs" />
+    <Compile Include="Arguments\BankAccountArguments.cs" />
     <Compile Include="Arguments\BitcoinArguments.cs" />
     <Compile Include="Arguments\DiscountArguments.cs" />
     <Compile Include="Arguments\EventArguments.cs" />
     <Compile Include="Arguments\RecipientArguments.cs" />
     <Compile Include="Arguments\TransferArguments.cs" />
-    <Compile Include="Clients\InvoiceClient.cs" />
-    <Compile Include="EventClient.cs" />
     <Compile Include="ClientExtensions.cs" />
     <Compile Include="Arguments\AddressArguments.cs" />
     <Compile Include="Arguments\ApplicationFeeArguments.cs" />
@@ -96,7 +90,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Folder Include="Clients\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

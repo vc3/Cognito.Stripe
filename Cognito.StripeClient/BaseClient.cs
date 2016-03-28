@@ -194,6 +194,11 @@ namespace Cognito.StripeClient
 			return result;
 		}
 
+		public static Event DeserializeEvent(string json)
+		{
+			return JsonUtility.Deserialize<Event>(json);
+		}
+
 		#region Request & Response
 
 		protected class Response
@@ -357,40 +362,6 @@ namespace Cognito.StripeClient
 		}
 
 		#endregion
-	}
-
-	public class BaseClient<T> : BaseClient
-		where T : BaseObject
-	{
-		public BaseClient(string apiKey, string baseUrl = "", APIVersion version = APIVersion.v1)
-			: base(apiKey, baseUrl, version)
-		{
-		}
-
-		public virtual T Create(CreateArguments args, bool throwExceptions = false)
-		{
-			return Create<T>(args, throwExceptions);
-		}
-
-		public virtual T Get(GetArguments args, bool throwExceptions = false)
-		{
-			return Get<T>(args, throwExceptions);
-		}
-
-		public virtual T Update(UpdateArguments args, bool throwExceptions = false)
-		{
-			return Update<T>(args, throwExceptions);
-		}
-
-		public virtual T Delete(DeleteArguments args, bool throwExceptions = false)
-		{
-			return Delete<T>(args, throwExceptions);
-		}
-
-		public virtual StripeList<T> List(SearchArguments args, bool throwExceptions = false)
-		{
-			return List<T>(args, throwExceptions);
-		}
 	}
 
 	public class ConnectClient : BaseClient

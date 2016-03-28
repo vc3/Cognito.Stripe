@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cognito.Stripe
+namespace Cognito.Stripe.Classes
 {
 	public class FeeDetail
 	{

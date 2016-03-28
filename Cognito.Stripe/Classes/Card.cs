@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cognito.Stripe.Classes
 {
-	public class Card : BaseObject
+	public class Card : PaymentSource
 	{
 		public override string Object { get { return "card"; } }
 
@@ -15,7 +15,6 @@ namespace Cognito.Stripe.Classes
 
 		public string Brand { get; set; }
 		public Country Country { get; set; }
-		public Currency Currency { get; set; }
 
 		[JsonProperty("cvc_check")]
 		public string CVCCheck { get; set; }
@@ -31,14 +30,14 @@ namespace Cognito.Stripe.Classes
 		[JsonProperty("exp_year")]
 		public int? ExpirationYear { get; set; }
 
-		public string Fingerprint { get; set; }
-
 		[JsonProperty("funding")]
 		public FundingType FundingType { get; set; }
 		
 		[JsonProperty("last4")]
 		public string LastFourDigits { get; set; }
+
 		public string Name { get; set; }
+		
 		public Recipient Recipient { get; set; }
 
 		[JsonProperty("tokenization_method")]

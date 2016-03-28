@@ -11,7 +11,9 @@ namespace Cognito.Stripe.Converters
 	{
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType.IsEnum;
+			var type = objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(objectType) : objectType;
+			
+			return type.IsEnum;
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -21,7 +23,9 @@ namespace Cognito.Stripe.Converters
 			if (reader.TokenType == JsonToken.String)
 			{
 				var value = reader.Value.ToString();
-				result = !String.IsNullOrWhiteSpace(value) ? Enum.Parse(objectType, value, true) : 0;
+				var type = objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(objectType) : objectType;
+
+				result = !String.IsNullOrWhiteSpace(value) ? Enum.Parse(type, value, true) : 0;
 			}
 
 			return result;
@@ -29,7 +33,7 @@ namespace Cognito.Stripe.Converters
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			writer.WriteValue(value.ToString());
+			writer.WriteValue(value.ToString().ToLower());
 		}
 	}
 }

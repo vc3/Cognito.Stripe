@@ -7,25 +7,14 @@ using System.Web;
 
 namespace Cognito.Stripe.Classes
 {
-	public class Transfer : BaseObject
+	public class Transfer : Transaction
 	{
 		public override string Object { get { return "transfer"; } }
 
-		public Currency Currency { get; set;}
-
-		[Cents]
-		public decimal? Amount { get; set; }
-
-		[Cents]
-		[JsonProperty("amount_reversed")]
-		public decimal? AmountReversed { get; set; }
-
-		[JsonProperty("application_fee")]
-		public ApplicationFee ApplicationFee { get; set; }
-
-		public BalanceTransaction BalanceTransaction { get; set; }
 		public DateTime? Date { get; set; }
+
 		public string Description { get; set; }
+		
 		public BankAccount Destination { get; set; }
 
 		[JsonProperty("destination_payment")]
@@ -42,15 +31,13 @@ namespace Cognito.Stripe.Classes
 		public bool Reversed { get; set; }
 
 		[JsonProperty("source_transaction")]
-		public Source SourceTransaction { get; set; }
+		public Transaction SourceTransaction { get; set; }
 
 		[JsonProperty("source_type")]
 		public SourceType SourceType { get; set; }
 
-		[JsonProperty("statement_descriptor")]
-		public string StatementDescriptor { get; set; }
-
 		public TransferStatus Status { get; set; }
+
 		public TransferType Type { get; set; }
 	}
 

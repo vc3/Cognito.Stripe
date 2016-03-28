@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Cognito.Stripe
+namespace Cognito.Stripe.Classes
 {
 	public class FundDetail
 	{
-		public Currency Currency { get; set; }
+		Currency Currency { get; set; }
 
 		[Cents]
-		public decimal? Amount { get; set; }
+		decimal? Amount { get; set; }
 	}
 }

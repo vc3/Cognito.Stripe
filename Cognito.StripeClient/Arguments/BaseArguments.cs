@@ -98,7 +98,10 @@ namespace Cognito.StripeClient.Arguments
 								else if (argValue is DateTime? && ((DateTime?)argValue).HasValue)
 									argValue = DateTimeConverter.ConvertToSeconds(argValue as DateTime?);
 
-								var paramValue = typeof(Lookup).IsAssignableFrom(property.PropertyType) ? ((Lookup)argValue).Code : argValue.ToString();
+								var objectType = property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(property.PropertyType) : property.PropertyType;
+								var paramValue = typeof(Lookup).IsAssignableFrom(objectType) ? ((Lookup)argValue).Code : argValue.ToString();
+								if (objectType.IsEnum)
+									paramValue = paramValue.ToLower();
 
 								argCollection.Add(key.ToLower(), HttpUtility.UrlEncode(paramValue));
 							}

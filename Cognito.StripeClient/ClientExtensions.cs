@@ -10,9 +10,9 @@ namespace Cognito.StripeClient
 {
 	public static class ClientExtensions
 	{
-		public static Charge CaptureCharge(this BaseClient client, ChargeCaptureArguments args)
+		public static Charge CaptureCharge(this BaseClient client, ChargeCaptureArguments args, bool throwException = false)
 		{
-			return client.Create<Charge>(args);
+			return client.Create<Charge>(args, throwException);
 		}
 
 		public static Invoice PayInvoice(this BaseClient client, InvoicePaymentArguments args, bool throwException = false)
@@ -20,9 +20,9 @@ namespace Cognito.StripeClient
 			return client.Update<Invoice>(args, throwException);
 		}
 
-		public static Transfer CancelTransfer(this BaseClient client, TransferCancelArguments args)
+		public static Transfer CancelTransfer(this BaseClient client, TransferCancelArguments args, bool throwException = false)
 		{
-			return client.Update<Transfer>(args);
+			return client.Update<Transfer>(args, throwException);
 		}
 	}
 }

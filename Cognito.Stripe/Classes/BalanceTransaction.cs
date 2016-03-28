@@ -33,10 +33,11 @@ namespace Cognito.Stripe.Classes
 		public BalanceTransactionStatus Status { get; set; }
 		public BalanceTransactionType Type { get; set; }
 		public string Description { get; set; }
-		public Source Source { get; set; }
 
 		[JsonProperty("sourced_transfers")]
 		public StripeList<Transfer> SourcedTransfers { get; set; }
+
+		public Transaction Source { get; set; }
 	}
 
 	public enum BalanceTransactionType

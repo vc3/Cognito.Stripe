@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Cognito.Stripe.Classes
 {
-	public class BankAccount : BaseObject
+	public class BankAccount : PaymentSource
 	{
 		public override string Object { get { return "bank_account"; } }
 
@@ -23,12 +23,8 @@ namespace Cognito.Stripe.Classes
 
 		public Country Country { get; set; }
 
-		public Currency Currency { get; set;}
-
 		[JsonProperty("default_for_currency")]
 		public bool CurrencyDefault { get; set; }
-
-		public string Fingerprint { get; set; }
 		
 		[JsonProperty("last4")]
 		public string LastFourDigits { get; set; }
@@ -37,8 +33,6 @@ namespace Cognito.Stripe.Classes
 		public string RoutingNumber { get; set; }
 
 		public string Status { get; set; }
-
-		public string Name { get; set; }
 	}
 
 	public enum BankAccountStatus

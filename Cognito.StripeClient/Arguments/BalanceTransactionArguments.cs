@@ -39,7 +39,10 @@ namespace Cognito.StripeClient.Arguments
 		public string SourceId { get; set; }
 		[JsonProperty("transfer")]
 		public string TransferId { get; set; }
-		public BalanceTransactionType Type { get; set; }
+		public BalanceTransactionType? Type { get; set; }
+
+		[JsonIgnore]
+		public bool ExpandSource { set { ToggleExpandedProperty(value, "data.source"); } }
 
 		public override string GetEndpoint() { return "balance/history"; }
 	}

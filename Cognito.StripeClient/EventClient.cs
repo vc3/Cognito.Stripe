@@ -35,7 +35,7 @@ namespace Cognito.StripeClient
 			{ typeof(BalanceTransaction), "balance_transaction"},
 			{ typeof(Event), "event"},
 			{ typeof(BitcoinReceiver), "bitcoin_receiver"},
-			{ typeof(Source), "source"}
+			{ typeof(PaymentSource), "source"}
 		};
 
 		public string DataObjectType { get; set; }

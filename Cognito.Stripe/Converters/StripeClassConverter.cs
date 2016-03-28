@@ -1,4 +1,5 @@
-﻿using Cognito.Stripe.Helpers;
+﻿using Cognito.Stripe.Classes;
+using Cognito.Stripe.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace Cognito.Stripe.Converters
 {
-	public class EntityConverter : JsonConverter
+	public class StripeClassConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(BaseObject).IsAssignableFrom(objectType);
+			return objectType.Namespace.Equals("Cognito.Stripe.Classes", StringComparison.OrdinalIgnoreCase) 
+				&& !typeof(BaseObject).IsAssignableFrom(objectType)
+				&& !typeof(EventData).IsAssignableFrom(objectType);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -24,17 +27,10 @@ namespace Cognito.Stripe.Converters
 				return null;
 
 			// create an instance of the specified type
-			var instance = FormatterServices.GetUninitializedObject(objectType);
+			object instance = null;
 
-			// if the token is the start of an object, fully populate the properties on the instance
-			// else the object is not fully expanded and only the id of the object is returned.
-			if (reader.TokenType == JsonToken.StartObject)
-			{
-				serializer.Populate(reader, instance);
-				((BaseObject)instance).Loaded = true;
-			}
-			else if (reader.TokenType == JsonToken.String)
-				((BaseObject)instance).Id = reader.Value.ToString();
+			instance = FormatterServices.GetUninitializedObject(objectType);
+			serializer.Populate(reader, instance);
 
 			if (instance != null)
 			{
@@ -54,7 +50,6 @@ namespace Cognito.Stripe.Converters
 						if (currentValue != null)
 							prop.SetValue(instance, BaseObject.GetAmount(currentValue, currency));
 					}
-
 				}
 			}
 

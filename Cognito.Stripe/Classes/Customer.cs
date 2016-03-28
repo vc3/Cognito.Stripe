@@ -18,33 +18,18 @@ namespace Cognito.Stripe.Classes
 		public decimal? AccountBalance { get; set; }
 
 		[JsonProperty("default_source")]
-		public Source DefaultSource { get; set; }
+		internal string DefaultSourceId { get; set; }
 
-		public bool Deliquent { get; set; }
+		[JsonIgnore]
+		public PaymentSource DefaultSource { get { return Sources.Data.FirstOrDefault(s => s.Id.Equals(DefaultSourceId, StringComparison.OrdinalIgnoreCase)); } }
+
+		public bool Delinquent { get; set; }
 		public string Description { get; set; }
 		public Discount Discount { get; set; }
 		public string Email { get; set; }
 		public ShippingInfo Shipping { get; set; }
-		public StripeList<Source> Sources { get; set; }
+		public StripeList<PaymentSource> Sources { get; set; }
 		
 		public StripeList<Subscription> Subscriptions { get; set; }
-
-		[JsonIgnore]
-		public Card DefaultCard 
-		{
-			get
-			{
-				return Sources != null ? Sources.Data.FirstOrDefault(c => c.Id == DefaultSource.Id) : null;
-			}		
-		}
-
-		[JsonIgnore]
-		public BitcoinReceiver DefaultReceiver
-		{
-			get
-			{
-				return Sources != null ? Sources.Data.FirstOrDefault(c => c.Id == DefaultSource.Id) : null;
-			}
-		}
 	}
 }

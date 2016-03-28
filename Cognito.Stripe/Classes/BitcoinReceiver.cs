@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace Cognito.Stripe.Classes
 {
-	public class BitcoinReceiver : BaseObject
+	public class BitcoinReceiver : PaymentSource
 	{
 		public override string Object { get { return "bitcoin_receiver"; } }
-
-		public Currency Currency { get; set; }
 
 		public bool Active { get; set; }
 		
@@ -33,6 +31,7 @@ namespace Cognito.Stripe.Classes
 		public string BitcoinUri { get; set; }
 
 		public string Description { get; set; }
+
 		public string Email { get; set; }
 
 		public bool Filled { get; set; }

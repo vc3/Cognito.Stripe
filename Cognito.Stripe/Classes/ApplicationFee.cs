@@ -7,26 +7,14 @@ using System.Web;
 
 namespace Cognito.Stripe.Classes
 {
-	public class ApplicationFee : BaseObject
+	public class ApplicationFee : Transaction
 	{	
 		public override string Object { get { return "application_fee"; } }
-
-		public Currency Currency { get; set;}
 
 		[JsonProperty("account")]
 		public string AccountId { get; set; }
 
-		[Cents]
-		public decimal? Amount { get; set; }	
-
-		[Cents]
-		[JsonProperty("amount_refunded")]
-		public decimal? AmountRefunded { get; set; }
-
 		public Application Application { get; set; }
-
-		[JsonProperty("balance_transaction")]
-		public BalanceTransaction BalanceTransaction { get; set; }
 
 		public Charge Charge { get; set; }
 

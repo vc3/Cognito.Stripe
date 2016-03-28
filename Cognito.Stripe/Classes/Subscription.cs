@@ -37,12 +37,15 @@ namespace Cognito.Stripe.Classes
 
 		[JsonProperty("tax_percent")]
 		public decimal? TaxPercent { get; set; }
-
-		[JsonProperty("trial_end")]
-		public DateTime? TrialEndDate { get; set; }
 		
 		[JsonProperty("trial_start")]
 		public DateTime? TrialStartDate { get; set; }
+
+		[JsonProperty("trial_end")]
+		public DateTime? TrialEndDate { get; set; }
+
+		[JsonIgnore]
+		public bool IsTrialing { get { return TrialEndDate.GetValueOrDefault(DateTime.MinValue) > DateTime.UtcNow; } }
 	}
 
 	public enum SubscriptionStatus

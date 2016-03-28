@@ -18,8 +18,10 @@ namespace Cognito.StripeClient
 			serializer = new JsonSerializer() { ReferenceLoopHandling = ReferenceLoopHandling.Serialize };
 			serializer.Converters.Add(new DateTimeConverter());
 			serializer.Converters.Add(new LookupConverter());
-			serializer.Converters.Add(new EntityConverter());
+			serializer.Converters.Add(new BaseObjectConverter());
 			serializer.Converters.Add(new EnumConverter());
+			serializer.Converters.Add(new EventDataConverter());
+			serializer.Converters.Add(new StripeClassConverter());
 		}
 
 		public static string Serialize(object value)
