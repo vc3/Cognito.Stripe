@@ -14,7 +14,7 @@ namespace Cognito.Stripe.Classes
 
 		public Currency Currency { get; set; }
 
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 		public string Description { get; set; }
 		public bool Discountable { get; set; }

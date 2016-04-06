@@ -1,5 +1,4 @@
-﻿using Cognito.Stripe.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,6 @@ namespace Cognito.Stripe.Classes
 		public string DisabledReason{ get; set; }
 
 		[JsonProperty("due_by")]
-		[JsonConverter(typeof(DateTimeConverter))]
 		public DateTime? DueDate { get; set; }
 
 		[JsonProperty("fields_needed")]

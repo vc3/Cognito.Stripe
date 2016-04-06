@@ -17,7 +17,7 @@ namespace Cognito.StripeClient.Arguments
 		private CardArguments card;
 		private BitcoinCreateArguments bitcoinReceiver;
 		
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 		public Currency Currency { get; set; }
 		[JsonProperty("customer")]
@@ -34,7 +34,7 @@ namespace Cognito.StripeClient.Arguments
 		[JsonProperty("receipt_email")]
 		public string ReceiptEmail { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("application_fee")]
 		public decimal? ApplicationFee { get; set; }
 		
@@ -72,11 +72,11 @@ namespace Cognito.StripeClient.Arguments
 		public string ChargeId { get; set; }
 		[JsonIgnore]
 		public Currency Currency { get; set; }
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 		[JsonProperty("receipt_email")]
 		public string ReceiptEmail { get; set; }
-		[Cents]
+		[Currency]
 		[JsonProperty("application_fee")]
 		public decimal? ApplicationFee { get; set; }
 

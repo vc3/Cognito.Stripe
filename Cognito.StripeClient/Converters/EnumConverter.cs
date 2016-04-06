@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cognito.Stripe.Converters
+namespace Cognito.StripeClient.Converters
 {
 	public class EnumConverter : JsonConverter
 	{

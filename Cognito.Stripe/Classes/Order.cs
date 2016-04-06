@@ -1,5 +1,4 @@
-﻿using Cognito.Stripe.Converters;
-using Cognito.Stripe.Helpers;
+﻿using Cognito.Stripe.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,13 +13,13 @@ namespace Cognito.Stripe.Classes
 		
 		public Currency Currency { get; set;}
 
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 
 		[JsonProperty("application")]
 		public string ApplicationId { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("application_fee")]
 		public decimal? ApplicationFee { get; set; }
 
@@ -43,7 +42,6 @@ namespace Cognito.Stripe.Classes
 		public OrderStatus Status { get; set; }
 
 		[JsonProperty("updated")]
-		[JsonConverter(typeof(DateTimeConverter))]
 		public DateTime? DateUpdated { get; set; }
 	}
 

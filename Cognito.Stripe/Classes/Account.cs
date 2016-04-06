@@ -25,9 +25,6 @@ namespace Cognito.Stripe.Classes
 
 		public Country Country { get; set; }
 		
-		[JsonProperty("currencies_supported")]
-		public ICollection<Currency> Currencies { get; set; }
-		
 		[JsonProperty("debit_negative_balances")]
 		public bool DebitNegativeBalances { get; set; }
 
@@ -37,11 +34,11 @@ namespace Cognito.Stripe.Classes
 		[JsonProperty("default_currency")]
 		public Currency DefaultCurrency { get; set; }
 
-		[JsonProperty("display_name")]
-		public string DisplayName { get; set; }
-
 		[JsonProperty("details_submitted")]
 		public bool DetailsSubmitted { get; set; }
+
+		[JsonProperty("display_name")]
+		public string DisplayName { get; set; }
 
 		public string Email { get; set; }
 
@@ -62,7 +59,7 @@ namespace Cognito.Stripe.Classes
 		public string SupportEmail { get; set; }
 
 		[JsonProperty("support_phone")]
-		public string SupportPhon { get; set; }
+		public string SupportPhone { get; set; }
 
 		[JsonProperty("support_url")]
 		public string SupportUrl { get; set; }

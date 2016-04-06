@@ -10,8 +10,9 @@ using System.Reflection;
 using Cognito.Stripe.Helpers;
 using Newtonsoft.Json.Linq;
 using System.Dynamic;
+using Cognito.Stripe;
 
-namespace Cognito.Stripe.Converters
+namespace Cognito.StripeClient.Converters
 {
 	public class EventDataConverter : JsonConverter
 	{

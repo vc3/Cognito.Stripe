@@ -12,7 +12,7 @@ namespace Cognito.StripeClient.Arguments
 {
 	public class TransferCreateArguments : CreateArguments
 	{
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 
 		public Currency Currency { get; set; }

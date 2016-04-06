@@ -18,7 +18,7 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public Currency Currency { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("application_fee")]
 		public decimal? ApplicationFeeAmount { get; set; }
 
@@ -91,7 +91,7 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public Currency Currency { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("application_fee")]
 		public decimal? ApplicationFeeAmount { get; set; }
 

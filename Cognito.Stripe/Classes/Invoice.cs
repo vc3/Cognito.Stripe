@@ -13,11 +13,11 @@ namespace Cognito.Stripe.Classes
 
 		public Currency Currency { get; set;}
 
-		[Cents]
+		[Currency]
 		[JsonProperty("amount_due")]
 		public decimal? AmountDue { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("application_fee")]
 		public decimal? ApplicationFeeAmount { get; set; }
 		
@@ -31,7 +31,7 @@ namespace Cognito.Stripe.Classes
 		public string Description { get; set; }
 		public Discount Discount { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("ending_balance")]
 		public decimal? EndingBalance { get; set; }
 
@@ -54,7 +54,7 @@ namespace Cognito.Stripe.Classes
 		[JsonProperty("receipt_number")]
 		public string ReceiptNumber { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("starting_balance")]
 		public decimal? StartingBalance { get; set; }
 
@@ -66,17 +66,17 @@ namespace Cognito.Stripe.Classes
 		[JsonProperty("subscription_proration_date")]
 		public DateTime? ProrationDate { get; set; }
 
-		[Cents]
+		[Currency]
 		public decimal? SubTotal { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("tax")]
 		public decimal? TaxAmount { get; set; }
 
 		[JsonProperty("tax_percent")]
 		public decimal? TaxPercent { get; set; }
 
-		[Cents]
+		[Currency]
 		public decimal? Total { get; set; }
 
 		[JsonProperty("webhooks_delivered_at")]

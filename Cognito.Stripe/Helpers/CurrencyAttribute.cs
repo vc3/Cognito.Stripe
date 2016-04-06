@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Cognito.Stripe.Helpers
 {
-	public class CentsAttribute : Attribute
+	public class CurrencyAttribute : Attribute
 	{
-		public CentsAttribute() { }
+		public CurrencyAttribute() { }
 
-		public CentsAttribute(string propertyName)
+		public CurrencyAttribute(string propertyName)
 			:base()
 		{
 			PropertyName = propertyName;

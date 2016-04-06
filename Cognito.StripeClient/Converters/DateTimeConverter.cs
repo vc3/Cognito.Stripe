@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Cognito.Stripe.Converters
+namespace Cognito.StripeClient.Converters
 {
 	public class DateTimeConverter : DateTimeConverterBase
 	{

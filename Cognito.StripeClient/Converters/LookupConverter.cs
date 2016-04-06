@@ -5,9 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Cognito.StripeClient;
 using Cognito.Stripe;
 
-namespace Cognito.Stripe.Converters
+namespace Cognito.StripeClient.Converters
 {
 	public class LookupConverter : JsonConverter
 	{
@@ -36,14 +37,35 @@ namespace Cognito.Stripe.Converters
 			}
 
 			if(reader.Value != null)
-				result = AllLookups[objectType][reader.Value.ToString().ToUpper()];
+				result = GetLookupValue(objectType, reader.Value.ToString());
 
 			return result;
 		}
 
+		public static Lookup GetLookupValue(Type objectType, string lookupCode)
+		{
+			Dictionary<string, Lookup> lookups = null;
+
+			if (!AllLookups.TryGetValue(objectType, out lookups))
+			{
+				lookups = new Dictionary<string, Lookup>();
+				var allProp = (Lookup[])objectType.GetProperty("All", BindingFlags.Static | BindingFlags.Public).GetValue(null);
+
+				foreach (var lookup in allProp)
+					lookups[lookup.Code] = lookup;
+
+				AllLookups[objectType] = lookups;
+			}
+
+			if(!String.IsNullOrWhiteSpace(lookupCode))
+				return AllLookups[objectType][lookupCode.ToUpper()];
+
+			return null;
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			writer.WriteValue(((Lookup)value).Code);
+			writer.WriteValue(((Lookup)value).Code.ToLower());
 		}
 	}
 }

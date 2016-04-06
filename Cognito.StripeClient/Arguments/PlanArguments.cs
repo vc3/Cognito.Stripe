@@ -14,7 +14,7 @@ namespace Cognito.StripeClient.Arguments
 	{
 		public string Id { get; set; }
 		public Currency Currency { get; set; }
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 		public PlanInterval Interval { get; set; }
 		[JsonProperty("interval_count")]

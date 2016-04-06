@@ -13,10 +13,10 @@ namespace Cognito.Stripe.Classes
 
 		public Currency Currency { get; set; }
 
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("bitcoin_amount")]
 		public decimal? BitcoinAmount { get; set; }
 

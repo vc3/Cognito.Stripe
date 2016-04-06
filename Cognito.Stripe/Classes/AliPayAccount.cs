@@ -12,7 +12,7 @@ namespace Cognito.Stripe.Classes
 	{
 		public override string Object { get { return "alipay_account"; } }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("payment_amount")]
 		public decimal Amount { get; set; }
 

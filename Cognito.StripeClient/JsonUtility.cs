@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cognito.Stripe.Converters;
+using Cognito.StripeClient.Converters;
 
 namespace Cognito.StripeClient
 {
@@ -21,6 +21,7 @@ namespace Cognito.StripeClient
 			serializer.Converters.Add(new BaseObjectConverter());
 			serializer.Converters.Add(new EnumConverter());
 			serializer.Converters.Add(new EventDataConverter());
+			serializer.Converters.Add(new DynamicHashConverter());
 			serializer.Converters.Add(new StripeClassConverter());
 		}
 

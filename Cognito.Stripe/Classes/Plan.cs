@@ -13,7 +13,7 @@ namespace Cognito.Stripe.Classes
 
 		public Currency Currency { get; set;}
 
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 
 		public PlanInterval Interval { get; set; }

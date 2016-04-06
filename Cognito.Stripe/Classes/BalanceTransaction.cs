@@ -13,20 +13,20 @@ namespace Cognito.Stripe.Classes
 
 		public Currency Currency { get; set; }
 
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 
 		[JsonProperty("available_on")]
 		public DateTime? Available { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("fee")]
 		public decimal? FeeAmount { get; set; }
 
 		[JsonProperty("fee_details")]
 		public ICollection<FeeDetail> FeeDetails { get; set; }
 
-		[Cents]
+		[Currency]
 		[JsonProperty("net")]
 		public decimal? NetAmount { get; set; }
 

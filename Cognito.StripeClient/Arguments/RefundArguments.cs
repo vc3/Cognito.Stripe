@@ -15,7 +15,7 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public string ChargeId { get; set; }
 
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 
 		[JsonIgnore]

@@ -1,5 +1,4 @@
-﻿using Cognito.Stripe.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,6 @@ namespace Cognito.Stripe.Classes
 {
 	public class TermsOfServiceAcceptance
 	{
-		[JsonConverter(typeof(DateTimeConverter))]
 		public DateTime? Date { get; set; }
 
 		[JsonProperty("ip")]

@@ -6,7 +6,7 @@ using System.Text;
 using Cognito.Stripe;
 using System.Collections.Specialized;
 using System.Reflection;
-using Cognito.Stripe.Converters;
+using Cognito.StripeClient.Converters;
 using System.Web;
 using Cognito.Stripe.Helpers;
 using System.Collections;
@@ -70,7 +70,7 @@ namespace Cognito.StripeClient.Arguments
 						}
 						else
 						{
-							var convertToCents = property.GetCustomAttribute<CentsAttribute>();
+							var convertToCents = property.GetCustomAttribute<CurrencyAttribute>();
 
 							// parse ICollection properties
 							if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>))

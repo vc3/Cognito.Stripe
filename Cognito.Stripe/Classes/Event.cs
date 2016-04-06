@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Cognito.Stripe.Converters;
 using Newtonsoft.Json.Linq;
 using System.Dynamic;
 using System.Collections.Specialized;

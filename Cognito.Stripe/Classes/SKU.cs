@@ -1,5 +1,4 @@
-﻿using Cognito.Stripe.Converters;
-using Cognito.Stripe.Helpers;
+﻿using Cognito.Stripe.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,13 +23,12 @@ namespace Cognito.Stripe.Classes
 
 		public PackageDimensions Dimensions { get; set; }
 		
-		[Cents]
+		[Currency]
 		public decimal? Price { get; set; }
 
 		public Product Product { get; set; }
 
 		[JsonProperty("updated")]
-		[JsonConverter(typeof(DateTimeConverter))]
 		public DateTime? DateUpdated { get; set; }
 	}
 }

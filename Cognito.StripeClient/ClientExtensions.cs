@@ -12,17 +12,17 @@ namespace Cognito.StripeClient
 	{
 		public static Charge CaptureCharge(this BaseClient client, ChargeCaptureArguments args, bool throwException = false)
 		{
-			return client.Create<Charge>(args, throwException);
+			return client.Create<Charge>(args, throwExceptions: throwException);
 		}
 
 		public static Invoice PayInvoice(this BaseClient client, InvoicePaymentArguments args, bool throwException = false)
 		{
-			return client.Update<Invoice>(args, throwException);
+			return client.Update<Invoice>(args, throwExceptions: throwException);
 		}
 
 		public static Transfer CancelTransfer(this BaseClient client, TransferCancelArguments args, bool throwException = false)
 		{
-			return client.Update<Transfer>(args, throwException);
+			return client.Update<Transfer>(args, throwExceptions: throwException);
 		}
 	}
 }

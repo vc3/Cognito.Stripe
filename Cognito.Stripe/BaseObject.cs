@@ -1,5 +1,4 @@
 ﻿using Cognito.Stripe.Classes;
-using Cognito.Stripe.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -36,7 +35,6 @@ namespace Cognito.Stripe
 		/// This is used when serializing the object for use in a <see cref="StripeClient"/> call
 		/// </summary>
 		[JsonProperty("created")]
-		[JsonConverter(typeof(DateTimeConverter))]
 		public DateTime? DateCreated { get; set; }
 
 		#region Methods

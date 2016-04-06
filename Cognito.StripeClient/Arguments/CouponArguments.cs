@@ -15,7 +15,7 @@ namespace Cognito.StripeClient.Arguments
 		public string Id { get; set; }
 		public CouponDuration Duration { get; set; }
 
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 
 		public Currency Currency { get; set; }

@@ -17,7 +17,7 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public Currency Currency { get; set; }
 
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 
 		public override string GetEndpoint()

@@ -11,7 +11,7 @@ namespace Cognito.StripeClient.Arguments
 {
 	public class BitcoinCreateArguments : CreateArguments
 	{
-		[Cents]
+		[Currency]
 		public decimal? Amount { get; set; }
 		public Currency Currency { get; set; }
 		public string Description { get; set; }

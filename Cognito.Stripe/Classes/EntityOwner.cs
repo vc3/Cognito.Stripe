@@ -1,5 +1,4 @@
-﻿using Cognito.Stripe.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,6 @@ namespace Cognito.Stripe.Classes
 		public Address Address { get; set; }
 
 		[JsonProperty("dob")]
-		[JsonConverter(typeof(DateOfBirthConverter))]
 		public DateTime? DateofBirth { get; set; }
 
 		[JsonProperty("first_name")]

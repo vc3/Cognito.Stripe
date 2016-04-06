@@ -1,5 +1,4 @@
-﻿using Cognito.Stripe.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +24,6 @@ namespace Cognito.Stripe.Classes
 		public StripeList<SKU> SKUs { get; set; }
 
 		[JsonProperty("updated")]
-		[JsonConverter(typeof(DateTimeConverter))]
 		public DateTime? DateUpdated { get; set; }
 
 		public string URL { get; set; }
