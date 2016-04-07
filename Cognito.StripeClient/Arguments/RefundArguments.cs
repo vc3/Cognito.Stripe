@@ -52,7 +52,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string GetEndpoint() { return String.Format("charges/{0}/refunds/{1}", ChargeId, Id); }
 	}
 
-	public class RefundSearchArguments : SearchArguments
+	public class RefundSearchArguments : ListArguments
 	{
 		[JsonIgnore]
 		public string ChargeId { get; set; }

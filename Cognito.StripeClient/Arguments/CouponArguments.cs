@@ -50,7 +50,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "coupons"; } }
 	}
 
-	public class CouponSearchArguments : SearchArguments
+	public class CouponSearchArguments : ListArguments
 	{
 		[JsonIgnore]
 		public override string ObjectName { get { return "coupons"; } }

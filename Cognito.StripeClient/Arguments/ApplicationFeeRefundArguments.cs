@@ -57,7 +57,7 @@ namespace Cognito.StripeClient.Arguments
 		}
 	}
 
-	public class ApplicationFeeRefundSearchArguments : SearchArguments
+	public class ApplicationFeeRefundSearchArguments : ListArguments
 	{ 
 		[JsonIgnore]
 		public string FeeId { get; set; }

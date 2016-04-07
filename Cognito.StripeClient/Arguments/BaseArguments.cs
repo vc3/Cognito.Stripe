@@ -13,21 +13,16 @@ using System.Collections;
 
 namespace Cognito.StripeClient.Arguments
 {
-	public abstract class BaseArguments
+	public class BaseArguments
 	{
-		public BaseArguments() { Metadata = new Dictionary<string, string>(); ExpandedProperties = new List<string>(); }
-
-		public Dictionary<string, string> Metadata { get; set; }
-
-		public virtual string GetEndpoint() { return ""; }
-
 		[JsonIgnore]
 		public virtual string ObjectName { get { return ""; } }
 
 		[JsonIgnore]
-		public ICollection<string> ExpandedProperties { get; private set; }
+		public string IdempotencyKey { get; set; }
 
-		protected NameValueCollection ParseBaseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
+		#region Methods
+		public virtual NameValueCollection Parse(APIClient client, NameValueCollection collection = null, string prefix = null)
 		{
 			NameValueCollection argCollection = collection ?? new NameValueCollection();
 
@@ -65,8 +60,8 @@ namespace Cognito.StripeClient.Arguments
 						if (argValue is BaseArguments)
 						{
 							var val = argValue as BaseArguments;
-							if(val != null)
-								val.ParseBaseArguments(client, argCollection, key);
+							if (val != null)
+								val.Parse(client, argCollection, key);
 						}
 						else
 						{
@@ -110,16 +105,10 @@ namespace Cognito.StripeClient.Arguments
 				}
 			}
 
-			if(ExpandedProperties.Count > 0)
-				argCollection.Add("expand[]", String.Join("&expand[]=", ExpandedProperties));
-
 			return argCollection;
 		}
 
-		public virtual NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
-		{
-			return ParseBaseArguments(client, collection, prefix);
-		}
+		public virtual string GetEndpoint() { return ""; }
 
 		protected int? ConvertToCents(object argValue, PropertyInfo currencyProp)
 		{
@@ -128,6 +117,25 @@ namespace Cognito.StripeClient.Arguments
 		
 			Currency currency = currencyProp.GetValue(this) as Currency ?? Currency.USD;
 			return BaseObject.GetAmountNoDecimal((decimal?)argValue, currency);
+		}
+		#endregion
+	}
+
+	public class BaseReadArguments : BaseArguments
+	{
+		public BaseReadArguments() { ExpandedProperties = new List<string>(); }
+
+		[JsonIgnore]
+		public ICollection<string> ExpandedProperties { get; private set; }
+
+		public override NameValueCollection Parse(APIClient client, NameValueCollection collection = null, string prefix = null)
+		{
+			var argCollection = base.Parse(client, collection, prefix);
+			
+			if (ExpandedProperties.Count > 0)
+				argCollection.Add("expand[]", String.Join("&expand[]=", ExpandedProperties));
+
+			return argCollection;
 		}
 
 		protected void ToggleExpandedProperty(bool expand, string propertyPath)
@@ -151,9 +159,26 @@ namespace Cognito.StripeClient.Arguments
 		}
 	}
 
-	public abstract class SearchArguments : BaseArguments
+	public class BaseModifyArguments : BaseArguments
 	{
+		public BaseModifyArguments() { Metadata = new Dictionary<string, string>(); }
+
+		public Dictionary<string, string> Metadata { get; set; }
+	}
+
+	public class GetArguments : BaseReadArguments
+	{
+		[JsonIgnore]
 		public string Id { get; set; }
+
+		public override string GetEndpoint()
+		{
+			return ObjectName + "/" + Id;
+		}
+	}
+
+	public class ListArguments : BaseReadArguments
+	{
 		public DateTime? Created { get; set; }
 
 		[JsonProperty("created[gt]")]
@@ -174,28 +199,17 @@ namespace Cognito.StripeClient.Arguments
 		{
 			return ObjectName;
 		}
-
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
-		{
-			Limit = Limit.GetValueOrDefault(100);
-			return base.ParseArguments(client, collection, prefix);
-		}
 	}
 
-	public abstract class CreateArguments : BaseArguments
+	public class CreateArguments : BaseModifyArguments
 	{
 		public override string GetEndpoint()
 		{
 			return ObjectName;
 		}
-
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
-		{
-			return base.ParseArguments(client, collection, prefix);
-		}
 	}
 
-	public abstract class GetArguments : BaseArguments
+	public class UpdateArguments : BaseModifyArguments
 	{
 		[JsonIgnore]
 		public string Id { get; set; }
@@ -204,30 +218,9 @@ namespace Cognito.StripeClient.Arguments
 		{
 			return ObjectName + "/" + Id;
 		}
-
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
-		{
-			return base.ParseArguments(client, collection, prefix);
-		}
 	}
 
-	public abstract class UpdateArguments : BaseArguments
-	{
-		[JsonIgnore]
-		public string Id { get; set; }
-
-		public override string GetEndpoint()
-		{
-			return ObjectName + "/" + Id;
-		}
-
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
-		{
-			return base.ParseArguments(client, collection, prefix);
-		}
-	}
-
-	public abstract class DeleteArguments : BaseArguments
+	public class DeleteArguments : BaseArguments
 	{
 		[JsonIgnore]
 		public string Id { get; set; }
@@ -235,11 +228,6 @@ namespace Cognito.StripeClient.Arguments
 		public override string GetEndpoint()
 		{
 			return ObjectName +  "/" + Id;
-		}
-
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
-		{
-			return base.ParseArguments(client, collection, prefix);
 		}
 	}
 }

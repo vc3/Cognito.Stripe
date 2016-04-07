@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cognito.StripeClient.Arguments
 {
-	public class LineItemSearchArguments : SearchArguments
+	public class LineItemSearchArguments : ListArguments
 	{
 		[JsonProperty("id")]
 		public string InvoiceId { get; set; }

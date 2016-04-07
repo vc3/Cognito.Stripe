@@ -56,7 +56,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "transfers"; } } 
 	}
 
-	public class TransferSearchArguments : SearchArguments
+	public class TransferSearchArguments : ListArguments
 	{
 		[JsonProperty("date[gt]")]
 		public DateTime? TransferDateAfter { get; set; }

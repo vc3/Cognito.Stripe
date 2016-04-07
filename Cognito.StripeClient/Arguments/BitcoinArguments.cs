@@ -27,7 +27,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string GetEndpoint() { return "bitcoin/receivers"; }
 	}
 
-	public class BitcoinSearchArguments : SearchArguments
+	public class BitcoinSearchArguments : ListArguments
 	{
 		public bool Active { get; set; }
 		public bool Filled { get; set; }

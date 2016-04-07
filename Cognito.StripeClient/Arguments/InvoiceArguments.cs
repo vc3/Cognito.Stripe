@@ -79,11 +79,6 @@ namespace Cognito.StripeClient.Arguments
 		{
 			return "invoices/upcoming";
 		}
-
-		public override System.Collections.Specialized.NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
-		{
-			return ParseBaseArguments(client, collection, prefix);
-		}
 	}
 
 	public class InvoiceUpdateArguments : UpdateArguments
@@ -115,7 +110,7 @@ namespace Cognito.StripeClient.Arguments
 		}
 	}
 
-	public class InvoiceSearchArguments : SearchArguments
+	public class InvoiceSearchArguments : ListArguments
 	{
 		[JsonProperty("customer")]
 		public string CustomerId { get; set; }

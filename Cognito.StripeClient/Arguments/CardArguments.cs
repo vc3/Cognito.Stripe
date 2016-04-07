@@ -102,7 +102,7 @@ namespace Cognito.StripeClient.Arguments
 		}
 	}
 
-	public class CardSearchArguments : SearchArguments
+	public class CardSearchArguments : ListArguments
 	{
 		[JsonIgnore]
 		public string CustomerId { get; set; }

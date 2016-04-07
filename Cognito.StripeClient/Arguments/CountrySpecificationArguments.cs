@@ -13,7 +13,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "country_specs"; } }		
 	}
 
-	public class CountrySpecificationSearchArguments : SearchArguments
+	public class CountrySpecificationSearchArguments : ListArguments
 	{
 		[JsonIgnore]
 		public override string ObjectName { get { return "country_specs"; } }

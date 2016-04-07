@@ -30,7 +30,7 @@ namespace Cognito.StripeClient.Arguments
 		}
 	}
 
-	public class ApplicationFeeSearchArguments : SearchArguments
+	public class ApplicationFeeSearchArguments : ListArguments
 	{
 		[JsonProperty("charge")]
 		public string ChargeId { get; set; }

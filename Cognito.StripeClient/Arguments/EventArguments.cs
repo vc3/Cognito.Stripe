@@ -13,7 +13,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "events"; } }
 	}
 
-	public class EventSearchArguments : SearchArguments
+	public class EventSearchArguments : ListArguments
 	{
 		[JsonIgnore]
 		public override string ObjectName { get { return "events"; } }

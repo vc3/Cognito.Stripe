@@ -55,7 +55,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "invoiceitems"; } }
 	}
 
-	public class InvoiceItemSearchArguments : SearchArguments
+	public class InvoiceItemSearchArguments : ListArguments
 	{ 
 		[JsonProperty("customer")]
 		public string CustomerId { get; set; }

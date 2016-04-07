@@ -22,7 +22,7 @@ namespace Cognito.StripeClient.Arguments
 		public bool ExpandSource { set { ToggleExpandedProperty(value, "source"); } }
 	}
 
-	public class BalanceTransactionSearchArguments : SearchArguments
+	public class BalanceTransactionSearchArguments : ListArguments
 	{
 		[JsonProperty("available_on[gt]")]
 		public DateTime? AvailableAfter { get; set; }

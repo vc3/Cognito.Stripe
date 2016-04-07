@@ -26,7 +26,7 @@ namespace Cognito.StripeClient.Arguments
 
 	public class CustomerArguments
 	{
-		public static void CreateSourceToken(BaseClient client, ISourceProvider args)
+		public static void CreateSourceToken(APIClient client, ISourceProvider args)
 		{
 			if (args.Card != null)
 			{
@@ -96,11 +96,11 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public override string ObjectName { get { return "customers"; } }
 
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
+		public override NameValueCollection Parse(APIClient client, NameValueCollection collection = null, string prefix = null)
 		{
 			CustomerArguments.CreateSourceToken(client, this);
 
-			return base.ParseArguments(client, collection, prefix);
+			return base.Parse(client, collection, prefix);
 		}
 	}
 
@@ -150,11 +150,11 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public override string ObjectName { get { return "customers"; } }
 
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
+		public override NameValueCollection Parse(APIClient client, NameValueCollection collection = null, string prefix = null)
 		{
 			CustomerArguments.CreateSourceToken(client, this);
 
-			return base.ParseArguments(client, collection, prefix);
+			return base.Parse(client, collection, prefix);
 		}
 	}
 
@@ -164,7 +164,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "customers"; } }
 	}
 
-	public class CustomerSearchArguments : SearchArguments
+	public class CustomerSearchArguments : ListArguments
 	{
 		[JsonIgnore]
 		public override string ObjectName { get { return "customers"; } }

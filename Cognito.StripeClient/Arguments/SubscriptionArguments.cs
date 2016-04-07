@@ -91,7 +91,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string GetEndpoint() { return String.Format("customers/{0}/subscriptions/{1}", CustomerId, Id); }
 	}
 
-	public class SubscriptionSearchArguments : SearchArguments
+	public class SubscriptionSearchArguments : ListArguments
 	{
 		[JsonIgnore]
 		public string CustomerId { get; set; }

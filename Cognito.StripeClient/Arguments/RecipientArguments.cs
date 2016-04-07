@@ -11,7 +11,7 @@ namespace Cognito.StripeClient.Arguments
 {
 	public class RecipientArguments
 	{ 
-		public static void CreateToken(BaseClient client, ISourceProvider args)
+		public static void CreateToken(APIClient client, ISourceProvider args)
 		{			
 			if (args.Card != null)
 			{
@@ -67,11 +67,11 @@ namespace Cognito.StripeClient.Arguments
 		[JsonProperty("bank_account")]
 		public string BankAccountToken { get; set; }
 
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
+		public override NameValueCollection Parse(APIClient client, NameValueCollection collection = null, string prefix = null)
 		{
 			RecipientArguments.CreateToken(client, this);
 
-			return base.ParseArguments(client, collection, prefix);
+			return base.Parse(client, collection, prefix);
 		}
 	}
 
@@ -116,11 +116,11 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public override string ObjectName { get { return "recipients"; } }
 
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
+		public override NameValueCollection Parse(APIClient client, NameValueCollection collection = null, string prefix = null)
 		{
 			RecipientArguments.CreateToken(client, this);
 
-			return base.ParseArguments(client, collection, prefix);
+			return base.Parse(client, collection, prefix);
 		}
 	}
 
@@ -130,7 +130,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "recipients"; } }
 	}
 
-	public class RecipientSearchArguments : SearchArguments
+	public class RecipientSearchArguments : ListArguments
 	{
 		public RecipientType Type { get; set; }
 		public bool? Verified { get; set; }

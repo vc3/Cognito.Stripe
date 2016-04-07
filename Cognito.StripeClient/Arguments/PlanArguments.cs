@@ -49,7 +49,7 @@ namespace Cognito.StripeClient.Arguments
 		public override string ObjectName { get { return "plans"; } }
 	}
 
-	public class PlanSearchArguments : SearchArguments
+	public class PlanSearchArguments : ListArguments
 	{
 		[JsonIgnore]
 		public override string ObjectName { get { return "plans"; } }

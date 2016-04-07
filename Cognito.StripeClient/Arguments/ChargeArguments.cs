@@ -43,7 +43,7 @@ namespace Cognito.StripeClient.Arguments
 		[JsonIgnore]
 		public override string ObjectName { get { return "charges"; } }
 
-		public override NameValueCollection ParseArguments(BaseClient client, NameValueCollection collection = null, string prefix = null)
+		public override NameValueCollection Parse(APIClient client, NameValueCollection collection = null, string prefix = null)
 		{
 			if (Card != null)
 			{
@@ -62,7 +62,7 @@ namespace Cognito.StripeClient.Arguments
 					Source = bcToken.Id;
 			}
 
-			return base.ParseArguments(client, collection, prefix);
+			return base.Parse(client, collection, prefix);
 		}
 	}
 
@@ -132,7 +132,7 @@ namespace Cognito.StripeClient.Arguments
 		public bool ExpandTransfer { set { ToggleExpandedProperty(value, "transfer"); } }
 	}
 
-	public class ChargeSearchArguments : SearchArguments
+	public class ChargeSearchArguments : ListArguments
 	{
 		[JsonProperty("customer")]
 		public string CustomerId { get; set; }
